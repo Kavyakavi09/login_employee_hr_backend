@@ -19,6 +19,10 @@ app.use(cors(corsOptions));
 // dotenv environment setup
 dotenv.config();
 
+app.get('/', (req, res) => {
+  res.send('Welcome to my App😊');
+});
+
 // To connected with routes
 app.use('/api/employee', employeeRoutes);
 app.use('/api/hr', hrRoutes);
