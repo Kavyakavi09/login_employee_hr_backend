@@ -7,6 +7,8 @@ export const signup = async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
+    const employee = await Employee.findOne({ name: req.body.name });
+    if (employee) return next(createError(401, 'Username Already Exists'));
     const newEmployee = new Employee({ ...req.body, password: hash });
 
     await newEmployee.save();
